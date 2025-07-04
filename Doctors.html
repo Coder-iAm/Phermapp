@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suraksha Pharmacy Doctors</title>
+    <link href="https://fonts.googleapis.com/css2?family=Arial:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script src="https://kit.fontawesome.com/YOUR_KIT_CODE.js" crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <span class="mainLogo1">
+                <img src="imgs/iconp.png" alt="HireoCraft" srcset="">
+                <h2>Suraksha Pharmacy</h2>
+            </span>
+            <div class="auth-options">
+                <button class="google" onclick="profileInfo(event)">Profile</button>
+
+            </div>
+        </div>
+    </header>
+
+
+
+    <div class="profile-menu" id="profileDropdown">
+
+    </div>
+
+    <!-- First Section -->
+<section class="search-section">
+  <input type="text" id="searchInput" placeholder="Search doctor by name..." />
+  <button id="searchBtn">Search</button>
+</section>
+
+    <section class="second-section">
+  <div class="doctors-container" id="doctors-container">
+    
+
+  
+  </div>
+</section>
+
+
+    <!-- End First Section -->
+
+
+    <script>
+
+
+
+
+        function profileInfo(event) {
+            event.stopPropagation();
+            const dropdown = document.getElementById("profileDropdown");
+            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+        }
+
+
+        document.addEventListener("click", () => {
+            document.getElementById("profileDropdown").style.display = "none";
+        });
+
+
+        document.getElementById("profileDropdown").addEventListener("click", (e) => {
+            e.stopPropagation();
+        });
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch("/user-list")
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const user = data.user; // ✅ Fix this
+
+                        const adminprofile = document.getElementById("profileDropdown");
+                        adminprofile.innerHTML = `
+                    <div class="profile2">
+                        <img src="imgs/default-person.jpg" alt="Admin">
+                    </div>
+                    <p><strong>Name:</strong> ${user.name}</p>
+                    <p><strong>Phone:</strong> ${user.phone}</p>
+                    <a href="signout" class="logout-btn">Log Out</a>`;
+                    }
+                })
+                .catch(error => {
+                    
+                    console.error(error);
+                });
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+// Fetch and store all doctors on load
+
+     document.addEventListener("DOMContentLoaded", function () {
+    const searchBtn = document.getElementById("searchBtn");
+    const searchInput = document.getElementById("searchInput");
+    const doc_Container = document.getElementById("doctors-container");
+    let allDoctors = [];
+
+   
+    fetch("/Doctor-list")
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                allDoctors = data.doctors;
+                renderDoctors(allDoctors); 
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching doctor list:", error);
+        });
+
+    
+    function renderDoctors(doctors) {
+        doc_Container.innerHTML = "";
+        if (doctors.length === 0) {
+            doc_Container.innerHTML = "<p>No doctors found.</p>";
+            return;
+        }
+
+        doctors.forEach(doctor => {
+            doc_Container.innerHTML += `
+                <div class="doctor-card">
+                    
+                    <h2><span class="profile3">
+                        <img src="imgs/default-person.jpg" alt="Admin">
+                    </span>${doctor.name}</h2>
+                    <p><strong>Specialization:</strong> ${doctor.specialization}</p>
+                    <p><strong>Time:</strong> ${doctor.day}, ${doctor.time}</p>
+                    <button class="book-btn">Book Appointment</button>
+                </div>
+            `;
+        });
+    }
+
+ 
+    searchBtn.addEventListener("click", () => {
+        const searchText = searchInput.value.trim().toLowerCase();
+        const filteredDoctors = allDoctors.filter(doctor =>
+            doctor.name.toLowerCase().includes(searchText)
+        );
+        renderDoctors(filteredDoctors);
+    });
+});
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,963 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Join Suraksha Pharmacy</title>
+    <!-- font awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    
+    <!-- Internal CSS -->
+    <style>
+        /* Base styles - following the reference but with enhancements */
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --linear-grad: linear-gradient(to right, #141E30, #243B55);
+            --hover-grad: linear-gradient(to right, #243B55, #3a5c85);
+            --grad-clr1: #141E30;
+            --grad-clr2: #243B55;
+            --shadow-color: rgba(36, 59, 85, 0.25);
+            --light-bg: #f6f5f7;
+            --input-bg: #f3f3f3;
+            --white: #ffffff;
+        }
+
+        body {
+            height: auto;
+            background: var(--light-bg);
+            display: grid;
+            place-content: center;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 15px;
+        }
+
+        .container {
+            position: relative;
+            height: 500px;
+            width: 850px;
+            background-color: var(--white);
+            box-shadow: 0 15px 35px var(--shadow-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .container:hover {
+            box-shadow: 0 20px 40px var(--shadow-color);
+        }
+
+        .form-container {
+            position: absolute;
+            width: 60%;
+            height: 100%;
+            padding: 0 40px;
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .sign-up-container {
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .sign-in-container {
+            z-index: 1;
+        }
+
+        form {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 50px;
+        }
+
+        h1 {
+            color: var(--grad-clr1);
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-size: 28px;
+            letter-spacing: 0.5px;
+        }
+
+        .social-container {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .social-container a {
+            border: 1px solid #DDD;
+            border-radius: 50%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 7px;
+            height: 42px;
+            width: 42px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .social-container a:hover {
+            background-color: var(--input-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-container i {
+            color: #666;
+            font-size: 16px;
+        }
+
+        span {
+            font-size: 12px;
+            margin-bottom: 15px;
+            color: #777;
+            font-weight: 500;
+        }
+
+        .infield {
+            position: relative;
+            margin: 10px 0;
+            width: 100%;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            background-color: var(--input-bg);
+            border: none;
+            outline: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05), 0 0 0 2px rgba(36, 59, 85, 0.1);
+        }
+
+        label {
+            position: absolute;
+            left: 50%;
+            top: 100%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--linear-grad);
+            transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        input:focus ~ label {
+            width: 100%;
+        }
+
+        a {
+            color: #333;
+            font-size: 14px;
+            text-decoration: none;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        a.forgot {
+            padding-bottom: 3px;
+            border-bottom: 2px solid #EEE;
+        }
+
+        a:hover {
+            color: var(--grad-clr2);
+        }
+
+        button {
+            border-radius: 25px;
+            border: 1px solid var(--grad-clr1);
+            background: var(--linear-grad);
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 14px 45px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(20, 30, 48, 0.15);
+        }
+
+        button:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 5px rgba(20, 30, 48, 0.15);
+        }
+
+        .form-container button {
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background: var(--white);
+            color: var(--grad-clr1);
+        }
+
+        .overlay-container {
+            position: absolute;
+            top: 0;
+            left: 60%;
+            width: 40%;
+            height: 100%;
+            overflow: hidden;
+            transition: transform 0.6s ease-in-out;
+            z-index: 9;
+        }
+
+        .overlay {
+            position: relative;
+            background: var(--linear-grad);
+            color: var(--white);
+            left: -150%;
+            height: 100%;
+            width: 250%;
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .overlay::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill-opacity="0.03" fill="%23ffffff" x="0" y="0" width="50" height="50" /><rect fill-opacity="0.03" fill="%23ffffff" x="50" y="50" width="50" height="50" /></svg>');
+            background-size: 30px;
+            opacity: 0.4;
+        }
+
+        .overlay-panel {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 40px;
+            text-align: center;
+            height: 100%;
+            width: 340px;
+            transition: 0.6s ease-in-out;
+        }
+
+        .overlay-left {
+            right: 60%;
+            transform: translateX(-12%);
+        }
+
+        .overlay-right {
+            right: 0;
+            transform: translateX(0);
+        }
+
+        .overlay-panel h1 {
+            color: var(--white);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 22px;
+            letter-spacing: 0.5px;
+            margin: 25px 0 35px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .overlay-panel button {
+            border: 1px solid var(--white);
+            background-color: transparent;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .overlay-panel button:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+        }
+
+        .right-panel-active .overlay-container {
+            transform: translateX(-150%);
+        }
+
+        .right-panel-active .overlay {
+            transform: translateX(50%);
+        }
+
+        .right-panel-active .overlay-left {
+            transform: translateX(25%);
+        }
+
+        .right-panel-active .overlay-right {
+            transform: translateX(35%);
+        }
+
+        .right-panel-active .sign-in-container {
+            transform: translateX(20%);
+            opacity: 0;
+        }
+
+        .right-panel-active .sign-up-container {
+            transform: translateX(66.7%);
+            opacity: 1;
+            z-index: 5;
+            animation: show 0.6s;
+        }
+
+        @keyframes show {
+            0%, 50% {
+                opacity: 0;
+                z-index: 1;
+            }
+            50.1%, 100% {
+                opacity: 1;
+                z-index: 5;
+            }
+        }
+
+        .btnScaled {
+            animation: scaleBtn 0.6s;
+        }
+
+        @keyframes scaleBtn {
+            0% {
+                width: 143.67px;
+            }
+            50% {
+                width: 250px;
+            }
+            100% {
+                width: 143.67px;
+            }
+        }
+
+        /* Enhanced mobile specific styles */
+        @media (max-width: 870px) {
+            body {
+                padding: 5px;
+                height: auto;
+               
+            }
+            
+            .container {
+                height: auto;
+                padding: 33px;
+                width: 100%;
+                
+                box-shadow: 0 15px 25px rgba(36, 59, 85, 0.2);
+            }
+            
+            /* Style for mobile tab navigation */
+            .mobile-nav {
+                display: flex;
+                justify-content: center;
+                background: var(--white);
+                padding: 8px;
+                border-radius: 30px;
+                margin: 0 auto 25px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+                position: relative;
+                width: 85%;
+                max-width: 300px;
+            }
+            
+            .mobile-nav button {
+                background: transparent;
+                border: none;
+                color: var(--grad-clr1);
+                padding: 10px ;
+                border-radius: 25px;
+                font-weight: 500;
+                font-size: 14px;
+                transition: all 0.3s ease;
+                margin: 0px;
+                flex: 1;
+                z-index: 1;
+                position: relative;
+             
+                box-shadow: none;
+            }
+            
+            .mobile-nav button.active {
+                color: var(--white);
+                font-weight: 600;
+            }
+            
+            /* Create a sliding background for active tab */
+            .mobile-nav:after {
+                content: '';
+                position: absolute;
+                width: 50%;
+                height: 85%;
+                background: var(--linear-grad);
+                top: 50%;
+                transform: translateY(-50%);
+                left: 5px;
+                border-radius: 25px;
+                transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            }
+            
+            .mobile-nav.signup-active:after {
+                left: 50%;
+            }
+            
+            /* Make forms take full width on mobile */
+            .form-container {
+                width: 100%;
+                padding: 0 20px;
+                position: relative;
+                left: 0;
+                opacity: 1;
+                height: 100%;
+            }
+            
+            /* Initially hide sign-up on mobile */
+            .sign-up-container {
+                display: none;
+            }
+            
+            /* Hide the overlay on mobile */
+            .overlay-container {
+                display: none;
+            }
+            
+            /* Adjust forms for mobile 
+            form {
+                padding: 0 0px;
+            }
+            */
+            h1 {
+                font-size: 28px;
+                margin-top: 30px;
+            }
+            form {
+                padding: 0 30px;
+            }
+            
+            .social-container {
+                margin: 20px 0;
+            }
+            
+            .social-container a {
+                transform: scale(1);
+                margin: 0 8px;
+                height: 45px;
+                width: 45px;
+            }
+            
+            button {
+                padding: 14px 45px;
+                font-size: 14px;
+                margin-top: 30px;
+            }
+            
+            /* Mobile toggle view classes */
+            .mobile-signup-active .sign-in-container {
+                display: none;
+            }
+            
+            .mobile-signup-active .sign-up-container {
+                display: block;
+                opacity: 1;
+                z-index: 5;
+            }
+            
+            /* Enhanced input fields for mobile */
+            input {
+                padding: 15px 16px;
+                border-radius: 8px;
+                font-size: 15px;
+            }
+            
+            .infield {
+                margin: 12px 0;
+            }
+            
+            /* Additional styling for mobile UI */
+            .form-container button {
+                width: 85%;
+                margin-top: 30px;
+                padding: 14px 0;
+            }
+            
+            span {
+                font-size: 14px;
+                margin-bottom: 15px;
+            }
+            
+            a.forgot {
+                margin-top: 20px;
+                font-size: 15px;
+            }
+        }
+        
+        /* For smaller mobile phones */
+        @media (max-width: 480px) {
+
+            .container {
+                width: 100%;
+               padding: 22px;
+                box-shadow: 0 10px 20px rgba(36, 59, 85, 0.15);
+            }
+            
+            .form-container {
+                padding: 0 15px;
+            }
+            
+            h1 {
+                font-size: 26px;
+            }
+            
+            .social-container a {
+                transform: scale(0.95);
+                margin: 0 6px;
+                height: 42px;
+                width: 42px;
+            }
+            
+            input {
+                padding: 14px 16px;
+                font-size: 15px;
+            }
+            
+            .mobile-nav {
+                width: 90%;
+                max-width: 280px;
+                margin-bottom: 20px;
+            }
+            
+            .mobile-nav button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            
+            .form-container button {
+                width: 90%;
+                padding: 12px 0;
+                font-size: 14px;
+            }
+        }
+
+
+        .toast {
+    display: none;
+    position: fixed;
+    top: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 14px 24px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 90%;
+    max-width: 350px;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Icon styling */
+.toast .icon {
+    font-size: 16px;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Show Toast */
+.toast.show {
+    display: flex;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Hide Toast Slowly */
+.toast.hide {
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+
+    </style>
+<style type="text/css" id="mytempCss">._8mqQwQ { display: none; } ._1TWLMK.icF5zO { opacity: 0.01; }</style></head>
+
+<body>
+    <!-- Mobile navigation - only visible on mobile -->
+    <div class="mobile-nav" id="mobile-nav" style="display: none;">
+        <button id="mobile-signin-btn" class="active">Sign In</button>
+        <button id="mobile-signup-btn">Sign Up</button>
+    </div>
+    <div class="toast">please fill with valid information</div>
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form action="#">
+                <h1>Create Account</h1>
+              
+                <span>or use your email for registration</span>
+                <div class="infield">
+                    <input type="text" placeholder="Name" id="signupname" required>
+                    <label></label>
+                </div>
+                <div class="infield">
+                    <input type="number" placeholder="Phone." name="ph" id="signupph">
+                    <label></label>
+                </div>
+                <div class="infield">
+                    <input type="email" placeholder="Email" name="email" id="signupemail">
+                    <label></label>
+                </div>
+                <div class="infield">
+                    <input type="password" placeholder="Password" id="signuppass" required>
+                    <label></label>
+                </div>
+                <button type="button" id="signup">Sign Up</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form>
+                <h1>Sign in</h1>
+               
+                <span>or use your account</span>
+                <div class="infield">
+                    <input type="number" placeholder="phone Number" name="phone" id="signinph" required>
+                    <label></label>
+                </div>
+                <div class="infield">
+                    <input type="password" placeholder="Password" id="signinpass" required>
+                    <label></label>
+                </div>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=webncommunity@gmail.com&su=Write%20your%20queries&body=" class="forgot">Forgot your password?</a>
+                <button type="button" id="signin">Sign In</button>
+            </form>
+        </div>
+        <div class="overlay-container" id="overlayCon" style="display: block;">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Welcome Back!</h1>
+                    <p>To keep connected with us please login with your personal info</p>
+                    <button type="button">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Hello, Friend!</h1>
+                    <p>Enter your personal details and start journey with us</p>
+                    <button type="button">Sign Up</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Internal JavaScript -->
+    <script>
+
+
+//signup rout
+document.getElementById("signup").addEventListener("click", () => {
+  
+    const name = document.getElementById("signupname").value;
+    const email = document.getElementById("signupemail").value;
+    const password = document.getElementById("signuppass").value;
+    const phone = document.getElementById("signupph").value;
+
+    if (!email) {
+  email = ""; 
+}
+
+
+    fetch("/user-entry", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name,phone,email, password }) 
+    })
+    .then(response => response.json())
+    .then(data => {
+        const toast = document.querySelector(".toast");
+
+        if (data.invalid) {
+            toast.innerHTML = "<span class='icon'>⚠</span> Username or password is incorrect!";
+            toast.style.backgroundColor = "#f2dede"; // Light red
+            toast.style.color = "#a94442"; // Dark red
+            toast.classList.add("show");
+
+            // Hide after 3 seconds
+            setTimeout(() => {
+                toast.classList.add("hide");
+                setTimeout(() => {
+                    toast.classList.remove("show", "hide");
+                }, 3500);
+            }, 4000);
+        } 
+       else if (data.exists) {
+            toast.innerHTML = "<span class='icon'>⚠</span> User Already Exists!";
+            toast.style.backgroundColor = "#f2dede"; // Light red
+            toast.style.color = "#a94442"; // Dark red
+            toast.classList.add("show");
+
+            // Hide after 3 seconds
+            setTimeout(() => {
+                toast.classList.add("hide");
+                setTimeout(() => {
+                    toast.classList.remove("show", "hide");
+                }, 3500);
+            }, 4000);
+        } 
+        else if (data.success) {
+            window.location.href = "/dashboard"; // Redirect to dashboard
+        } 
+        else {
+            console.log("Unexpected response");
+        }
+    })
+    .catch(error => console.error("Error:", error));
+});
+
+
+//signup end
+
+
+//signin rout
+document.getElementById("signin").addEventListener("click", () => {
+    // Get values from input fields
+   
+    const phone = document.getElementById("signinph").value;
+    const password = document.getElementById("signinpass").value;
+
+    fetch("/user-login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ phone, password }) 
+    })
+    .then(response => response.json())
+    .then(data => {
+        const toast = document.querySelector(".toast");
+
+        if (data.error) {
+            toast.innerHTML = "<span class='icon'>⚠</span> Username or password is incorrect!";
+            toast.style.backgroundColor = "#f2dede"; // Light red
+            toast.style.color = "#a94442"; // Dark red
+            toast.classList.add("show");
+
+            // Hide after 3 seconds
+            setTimeout(() => {
+                toast.classList.add("hide");
+                setTimeout(() => {
+                    toast.classList.remove("show", "hide");
+                }, 3500);
+            }, 4000);
+        } 
+
+       else if (data.err) {
+            toast.innerHTML = "<span class='icon'>⚠</span> Username or password is incorrect!";
+            toast.style.backgroundColor = "#f2dede"; // Light red
+            toast.style.color = "#a94442"; // Dark red
+            toast.classList.add("show");
+
+            // Hide after 3 seconds
+            setTimeout(() => {
+                toast.classList.add("hide");
+                setTimeout(() => {
+                    toast.classList.remove("show", "hide");
+                }, 3500);
+            }, 4000);
+        } 
+
+        else if (data.success) {
+            window.location.href = "/dashboard"; // Redirect to dashboard
+        } 
+        else {
+            console.log("Unexpected response");
+        }
+    })
+    .catch(error => console.error("Error:", error));
+});
+
+
+//signin end
+
+
+
+
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('container');
+            const overlayCon = document.getElementById('overlayCon');
+            const overlayBtn = document.getElementById('overlayBtn');
+            const mobileNav = document.getElementById('mobile-nav');
+            const mobileSignInBtn = document.getElementById('mobile-signin-btn');
+            const mobileSignUpBtn = document.getElementById('mobile-signup-btn');
+            
+            // Desktop toggle
+            if (overlayBtn) {
+                overlayBtn.addEventListener('click', function() {
+                    container.classList.toggle('right-panel-active');
+                    
+                    overlayBtn.classList.remove('btnScaled');
+                    window.requestAnimationFrame(() => {
+                        overlayBtn.classList.add('btnScaled');
+                    });
+                });
+            }
+            
+            // All overlay buttons functionality
+            const overlayButtons = document.querySelectorAll('.overlay-panel button');
+            overlayButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    container.classList.toggle('right-panel-active');
+                });
+            });
+            
+            // Mobile toggle buttons
+            if (mobileSignInBtn) {
+                mobileSignInBtn.addEventListener('click', function() {
+                    container.classList.remove('mobile-signup-active');
+                    mobileSignInBtn.classList.add('active');
+                    mobileSignUpBtn.classList.remove('active');
+                    mobileNav.classList.remove('signup-active');
+                });
+            }
+            
+            if (mobileSignUpBtn) {
+                mobileSignUpBtn.addEventListener('click', function() {
+                    container.classList.add('mobile-signup-active');
+                    mobileSignUpBtn.classList.add('active');
+                    mobileSignInBtn.classList.remove('active');
+                    mobileNav.classList.add('signup-active');
+                });
+            }
+            
+            // Input focus effects
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    const label = this.nextElementSibling;
+                    if (label) label.style.width = '100%';
+                });
+                
+                input.addEventListener('blur', function() {
+                    const label = this.nextElementSibling;
+                    if (label && !this.value) label.style.width = '0';
+                });
+            });
+            
+            // Add focus animation to inputs with values
+            function checkInputsWithValue() {
+                inputs.forEach(input => {
+                    if (input.value.trim() !== '') {
+                        const label = input.nextElementSibling;
+                        if (label) label.style.width = '100%';
+                    }
+                });
+            }
+            
+            // Run once on page load
+            checkInputsWithValue();
+            
+            // Responsive behavior
+            function handleResponsive() {
+                const isMobile = window.innerWidth <= 870;
+                
+                if (isMobile) {
+                    // Mobile view
+                    mobileNav.style.display = 'flex';
+                    if (overlayCon) overlayCon.style.display = 'none';
+                    
+                    // Reset any desktop-specific classes
+                    container.classList.remove('right-panel-active');
+                    
+                    // Ensure correct container is visible based on active mobile button
+                    if (container.classList.contains('mobile-signup-active')) {
+                        mobileSignUpBtn.classList.add('active');
+                        mobileSignInBtn.classList.remove('active');
+                        mobileNav.classList.add('signup-active');
+                    } else {
+                        mobileSignInBtn.classList.add('active');
+                        mobileSignUpBtn.classList.remove('active');
+                        mobileNav.classList.remove('signup-active');
+                    }
+                } else {
+                    // Desktop view
+                    mobileNav.style.display = 'none';
+                    if (overlayCon) overlayCon.style.display = 'block';
+                    
+                    // Reset mobile-specific classes
+                    container.classList.remove('mobile-signup-active');
+                    
+                    // Ensure all containers are in their default desktop state
+                    const signInContainer = document.querySelector('.sign-in-container');
+                    const signUpContainer = document.querySelector('.sign-up-container');
+                    
+                    // Reset any mobile-specific styles
+                    signInContainer.style.display = '';
+                    signUpContainer.style.display = '';
+                    signUpContainer.style.opacity = '';
+                }
+            }
+            
+            // Initial setup
+            handleResponsive();
+            
+            // Handle window resize
+            window.addEventListener('resize', handleResponsive);
+            
+            // Add button press effect
+            const allButtons = document.querySelectorAll('button');
+            allButtons.forEach(button => {
+                button.addEventListener('mousedown', function() {
+                    this.style.transform = 'scale(0.95)';
+                });
+                
+                button.addEventListener('mouseup', function() {
+                    this.style.transform = '';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                });
+                
+                // Touch events for mobile
+                button.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.95)';
+                });
+                
+                button.addEventListener('touchend', function() {
+                    this.style.transform = '';
+                });
+            });
+        });
+    </script>
+
+
+</body></html>

@@ -2,7 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const app = express();
 const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '.env.local') });
+require('dotenv').config();
 const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session); 
 const mysql = require('mysql2');
